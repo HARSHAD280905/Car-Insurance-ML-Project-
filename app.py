@@ -94,7 +94,11 @@ encoded_df = encoded_df[dummy_columns]
 # ===============================
 if st.button("🔍 Predict Claim"):
     prob = model.predict_proba(encoded_df)[0][1]
-    result = "CLAIM" if prob > 0.49 else "NO CLAIM"
+
+    if prob > 0.50:
+        result = "CLAIM" 
+    else:
+        result = "NO CLAIM"
 
     st.markdown("### 🏷️ Prediction Result")
     st.metric(label="Claim Status", value=result)
